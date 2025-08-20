@@ -13,7 +13,7 @@ return (
 <>
 {/* Mobile Header - Full width navbar */}
 
-<div className="lg:hidden  mb-2  bg-white shadow-md p-4 flex justify-between items-center w-screen fixed left-0 z-50 rounded-b-lg">
+<div className="lg:hidden  mb-2  bg-white shadow-md p-4 h-12 flex justify-between items-center w-screen fixed left-0 z-50 rounded-b-lg">
  <div className="block w-full">
   <h2 className="text-2xl font-bold">
     Vis.<span className="text-blue-400">A</span>
@@ -27,7 +27,7 @@ className="p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
 
 {/* Mobile Menu - Dropdown */}
 {expanded && (
-<div className="lg:hidden bg-white shadow-lg w-screen fixed top-16 left-0 z-40 border-t">
+<div className="lg:hidden bg-white shadow-lg w-screen fixed top-15 rounded-b-2xl left-0 z-40 border-t">
 <ul className="px-4 py-2">
 {children}
 </ul>
@@ -36,8 +36,8 @@ className="p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
 
 {/* Desktop Sidebar */}
 <div className="hidden ">
-<aside className={`w-64 h-screen fixed left-0 top-0`}>
-   <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+<aside className={`w-64  fixed left-0 top-0`}>
+   <nav className=" flex flex-col bg-white border-r shadow-sm">
 <div className="p-4 pb-2 flex justify-between items-center">
 <button onClick={() => setexpanded(!expanded)}
 className="p-1.5 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-900">

@@ -113,15 +113,19 @@ export default function Home() {
             
     
             <div className="mb-8 mt-4">
-              <h1 className="text-6xl md:text-8xl font-black leading-tight mb-6">
-                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
-                  Vis.A
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
-                  (Visualization OF Algorithms)
-                </span>
-              </h1>
+             <div className="mb-10 mt-6 text-center">
+  <h1 className="text-6xl md:text-8xl font-extrabold tracking-tight leading-tight mb-4">
+    <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg">
+      Vis.<span className="text-pink-500">A</span>
+    </span>
+  </h1>
+  <p className="text-xl md:text-2xl font-medium bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent animate-fadeIn">
+    - Visualization of Algorithms
+  </p>
+  <div className="mt-6 flex justify-center">
+   
+  </div>
+</div>
               
               <div className="relative">
                 <p className="text-2xl md:text-3xl text-gray-300 font-light mb-8 max-w-4xl mx-auto leading-relaxed">
@@ -257,15 +261,16 @@ export default function Home() {
   return (
     <>
       {/* Mobile Layout - Show Sidebar */}
-      <div className=" lg:hidden relative  overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className=" lg:hidden relative   overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
         {/* Mobile Sidebar */}
+        <div className="mt-4">
         <Sidebar>
           <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />
           <SidebarItem icon={<Charts size={20} />} text="Algorithms" link="/Category"  />
           <SidebarItem icon={<Bot size={20} />} text="Chatbot" link="/Chatbot" />
           <SidebarItem icon={<Flag size={20} />} text="About" link="#footer" />
         </Sidebar>
-
+</div>
 
         <div className={`transition-all duration-300 pt-16`}>
           <div className="relative min-h-screen ">

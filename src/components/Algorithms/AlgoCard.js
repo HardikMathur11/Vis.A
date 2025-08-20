@@ -54,13 +54,13 @@ const AlgorithmPage = () => {
         <div className="absolute top-20 left-10 w-4 h-4 bg-cyan-400/50 rotate-45 animate-spin" style={{ animationDuration: '20s' }} />
         <div className="absolute top-40 right-20 w-6 h-6 bg-purple-400/50 rounded-full animate-bounce" style={{ animationDelay: '1s' }} />
       </div>
-       <div className="relative z-10 p-6 lg:p-8  mt-15 sm:mt-0 ">
+       <div className="relative z-10 p-6 lg:p-8  mt-16 sm:mt-0 ">
         <div className="max-w-7xl mx-auto">
           
     
-          <div className="text-center mb-12 ">
+          <div className="text-center mb-12  ">
             <h1 className="text-5xl lg:text-7xl font-black leading-tight mb-6">
-              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-pulse">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text  text-transparent animate-pulse">
                 {algo.name}
               </span>
             </h1>
@@ -182,7 +182,7 @@ const AlgorithmPage = () => {
               </h2>
             </div>
             
-            <div className="p-8">
+            <div className="lg:p-8 p-1">
               {animationComponents[algo.animationComponent] || (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 backdrop-blur rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">

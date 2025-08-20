@@ -5,7 +5,10 @@
   "license": "ISC",
   "author": "Hardik Mathur",
   "type": "module",
-  "scripts": {},
+   "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
   "dependencies": {
     "@google/genai": "^1.15.0",
     "@tailwindcss/postcss": "^4.1.11",

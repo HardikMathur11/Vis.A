@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 const LinearSearchVisualizer = () => {
-  // State for the array and visualization
+  
   const [array, setArray] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
   const [speed, setSpeed] = useState(2);
@@ -9,21 +9,21 @@ const LinearSearchVisualizer = () => {
   const [sortedIndices, setSortedIndices] = useState([]);
   const [currentStep, setCurrentStep] = useState('Ready to sort');
   const [isPaused, setIsPaused] = useState(false);
-  const [elementInput, setElementInput] = useState(""); // Renamed for clarity
+  const [elementInput, setElementInput] = useState("");
   const pauseRef = useRef(false);
   const sortingActiveRef = useRef(false);
   const [target , settarget] = useState("");
   const [isfound , setisfound] = useState(false);
   const [isnotfound , setisnotfound] = useState(false);
 
-  // Generate array based on user input or random
+ 
   const generateArray = useCallback((size = 20) => {
-    // If user has entered elements, use those
+
     if (elementInput.trim() !== "") {
       try {
         const newArray = elementInput.split(',')
           .map(num => parseInt(num.trim(), 10))
-          .filter(num => !isNaN(num) && num<50); // Filter out any non-numbers
+          .filter(num => !isNaN(num) && num<50);
         
         if (newArray.length > 0) {
           setArray(newArray);
@@ -42,7 +42,7 @@ const LinearSearchVisualizer = () => {
       }
     }
     
-    // Fallback to random array
+   
     const newArray = [];
     for (let i = 0; i < size; i++) {
       newArray.push(Math.floor(Math.random() * 20 % size) + 1);
@@ -58,28 +58,28 @@ const LinearSearchVisualizer = () => {
     sortingActiveRef.current = false;
   }, [elementInput]);
 
-  // Initialize array on mount
+  
   useEffect(() => {
     generateArray();
   }, [generateArray]);
 
-  // Improved delay function with reliable pause
+  
   const delay = useCallback(async (ms) => {
     return new Promise((resolve) => {
       const checkPause = () => {
         if (pauseRef.current && sortingActiveRef.current) {
-          setTimeout(checkPause, 50); // Keep checking while paused
+          setTimeout(checkPause, 50);
         } else if (sortingActiveRef.current) {
-          setTimeout(resolve, ms); // Resume with delay
+          setTimeout(resolve, ms); 
         } else {
-          resolve(); // Exit if sorting stopped
+          resolve(); 
         }
       };
       checkPause();
     });
   }, []);
 
-  // Selection sort implementation
+ 
   const startLinearSearch = async () => {
     if (isSorting) return;
 
@@ -177,7 +177,6 @@ const LinearSearchVisualizer = () => {
       <div className="max-w-6xl mx-auto w-full p-4">
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8">Linear Search Visualizer</h1>
 
-        {/* Custom array input */}
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-4 w-full">
           <div className="flex flex-col w-full sm:w-64">
             <label className="mb-1 text-xs sm:text-sm font-semibold text-gray-700">Custom Array</label>
@@ -203,7 +202,7 @@ const LinearSearchVisualizer = () => {
           </div>
         </div>
 
-        {/* Controls */}
+     
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-8 w-full">
           <button
             onClick={() => handlearray()}
@@ -281,12 +280,12 @@ const LinearSearchVisualizer = () => {
         </div>
          </div>
 
-        {/* Status information */}
+     
         <div className="text-center mb-2 sm:mb-4 min-h-8">
           <p className={`text-xs sm:text-lg font-semibold ${isfound ? 'text-green-400 sm:text-2xl' : 'text-xs sm:text-lg'}  ${isnotfound ? 'text-red-400 sm:text-2xl' : 'text-xs sm:text-lg'}`}>{currentStep}</p>
         </div>
 
-        {/* Array Visualization */}
+   
         <div className="flex items-end h-[50vh] sm:h-[75vh] bg-white p-1 sm:p-4 rounded-lg shadow-md border border-gray-200 w-full overflow-x-auto sm:overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
           {array.map((value, index) => {
             const isActive = activeIndices.includes(index);
@@ -313,7 +312,7 @@ const LinearSearchVisualizer = () => {
           })}
         </div>
 
-        {/* Legend */}  
+        
         <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-6 w-full">
           <div className="flex items-center mb-2 sm:mb-0">
             <div className="w-4 h-4 bg-blue-500 mr-1 sm:mr-2 rounded-sm"></div>

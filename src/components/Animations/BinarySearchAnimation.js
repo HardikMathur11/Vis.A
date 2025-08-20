@@ -2,7 +2,7 @@ import { Binary } from 'lucide-react';
 import { useState, useEffect, useCallback, useRef } from 'react';
 
 const BinarySeachVisualizer = () => {
-  // State for the array and visualization
+  
   const [array, setArray] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
   const [speed, setSpeed] = useState(2);
@@ -10,7 +10,7 @@ const BinarySeachVisualizer = () => {
   const [sortedIndices, setSortedIndices] = useState([]);
   const [currentStep, setCurrentStep] = useState('Ready to sort');
   const [isPaused, setIsPaused] = useState(false);
-  const [elementInput, setElementInput] = useState(""); // Renamed for clarity
+  const [elementInput, setElementInput] = useState("");
   const pauseRef = useRef(false);
   const sortingActiveRef = useRef(false);
   const [target , settarget] = useState("");
@@ -24,14 +24,13 @@ const BinarySeachVisualizer = () => {
   const [totalSteps, setTotalSteps] = useState(0);
   const [stepExplanation, setStepExplanation] = useState('');
 
-  // Generate array based on user input or random
   const generateArray = useCallback((size = 20) => {
-    // If user has entered elements, use those
+   
     if (elementInput.trim() !== "") {
       try {
         const newArray = elementInput.split(',')
           .map(num => parseInt(num.trim(), 10))
-          .filter(num => !isNaN(num) && num<50); // Filter out any non-numbers
+          .filter(num => !isNaN(num) && num<50); 
         
         if (newArray.length > 0) {
           setArray(newArray);
@@ -53,7 +52,7 @@ const BinarySeachVisualizer = () => {
       }
     }
     
-    // Fallback to random array
+   
     const newArray = [];
     for (let i = 0; i < size; i++) {
       newArray.push(Math.floor(Math.random() * 20 % size) + 1);
@@ -67,7 +66,7 @@ const BinarySeachVisualizer = () => {
   setisfound(false);
   setisnotfound(false);
   sortingActiveRef.current = false;
-  // Reset bar colors to blue by clearing mid/side/step states
+
   setMidIndex(null);
   setLeftIndex(null);
   setRightIndex(null);
@@ -79,28 +78,27 @@ const BinarySeachVisualizer = () => {
   setisnotfound(false);
   }, [elementInput]);
 
-  // Initialize array on mount
   useEffect(() => {
     generateArray();
   }, [generateArray]);
 
-  // Improved delay function with reliable pause
+ 
   const delay = useCallback(async (ms) => {
     return new Promise((resolve) => {
       const checkPause = () => {
         if (pauseRef.current && sortingActiveRef.current) {
-          setTimeout(checkPause, 50); // Keep checking while paused
+          setTimeout(checkPause, 50); 
         } else if (sortingActiveRef.current) {
-          setTimeout(resolve, ms); // Resume with delay
+          setTimeout(resolve, ms); 
         } else {
-          resolve(); // Exit if sorting stopped
+          resolve(); 
         }
       };
       checkPause();
     });
   }, []);
 
-  // Selection sort implementation
+
 const startBinarySearch = async () => {
   if (isSorting) return;
   if (!target || target === "") {
@@ -124,7 +122,6 @@ const startBinarySearch = async () => {
   setisnotfound(false);
   setisfound(false);
 
-  // Sort the array for binary search
   let arr = [...array].sort((a, b) => a - b);
   setArray(arr);
   setCurrentStep("Array sorted for Binary Search...");
@@ -135,7 +132,7 @@ const startBinarySearch = async () => {
   let right = arr.length - 1;
   let found = false;
 
-  // Precompute total steps for indicator
+
   let tempL = left, tempR = right, tempSteps = 0;
   while (tempL <= tempR) {
     tempSteps++;
@@ -164,7 +161,7 @@ const startBinarySearch = async () => {
     }
     setStepExplanation(explanation);
     setCurrentStep(explanation);
-    await delay(1200); // Slower visualization for each step
+    await delay(1200); 
 
     if (!sortingActiveRef.current) break;
 
@@ -174,17 +171,17 @@ const startBinarySearch = async () => {
       setCurrentStep(`Found target ${target} at index ${mid}`);
       setStepExplanation(`Found target ${target} at index ${mid}.`);
       setSortedIndices([mid]);
-      await delay(1800); // Show green for longer when found
+      await delay(1800);
       found = true;
       break;
     } else if (arr[mid] < target) {
       left = mid + 1;
       setside([left , right]);
-      await delay(600); // Slight delay for pointer movement
+      await delay(600);
     } else {
       right = mid - 1;
       setside([left , right]);
-      await delay(600); // Slight delay for pointer movement
+      await delay(600); 
     }
     steps++;
   }
@@ -197,7 +194,7 @@ const startBinarySearch = async () => {
      setIsSorting(false);
   sortingActiveRef.current = false;
   setIsPaused(false);
-  // Reset bar colors to blue after completion
+
   setSortedIndices([]);
   setActiveIndices([]);
   setMidIndex(null);
@@ -217,7 +214,7 @@ const startBinarySearch = async () => {
   await delay ( 600);
   sortingActiveRef.current = false;
   setIsPaused(false);
-  // Reset bar colors to blue after completion
+
   setCurrentStep("");
   setSortedIndices([]);
   setActiveIndices([]);
@@ -249,7 +246,7 @@ const startBinarySearch = async () => {
   }
 
   const stopSorting = () => {
-  sortingActiveRef.current = false; // Stops immediately
+  sortingActiveRef.current = false;
   
 };
 
@@ -257,9 +254,8 @@ const startBinarySearch = async () => {
   return (
   <div className="min-h-full bg-gray-100 p-1 sm:p-16 md:p-8">
       <div className="max-w-6xl mx-auto w-full p-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8">Linear Search Visualizer</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8">Binary Search Visualizer</h1>
 
-        {/* Custom array input */}
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-4 w-full">
           <div className="flex flex-col w-full sm:w-64">
             <label className="mb-1 text-xs sm:text-sm font-semibold text-gray-700">Custom Array</label>
@@ -285,7 +281,7 @@ const startBinarySearch = async () => {
           </div>
         </div>
 
-        {/* Controls */}
+       
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-8 w-full">
           <button
             onClick={() => handlearray()}
@@ -303,7 +299,7 @@ const startBinarySearch = async () => {
               isSorting && !isPaused ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'
             } text-white`}
           >
-            Start Linear Search
+            Start binary Search
           </button>
           {isSorting && (
             <button
@@ -363,14 +359,12 @@ const startBinarySearch = async () => {
         </div>
          </div>
 
-        {/* Status information */}
         <div className="text-center mb-2 sm:mb-4 min-h-8">
           <p className={`text-xs sm:text-lg font-semibold ${isfound ? 'text-green-400 sm:text-2xl' : 'text-xs sm:text-lg'}  ${isnotfound ? 'text-red-400 sm:text-2xl' : 'text-xs sm:text-lg'}`}>{currentStep}</p>
         </div>
 
-        {/* Array Visualization */}
         <div className="flex items-end h-[50vh] sm:h-[75vh] bg-white p-1 sm:p-4 rounded-lg shadow-md border border-gray-200 w-full overflow-x-auto sm:overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 relative">
-          {/* Pointers above bars */}
+        
           <div className="absolute left-0 right-0 flex justify-between px-2" style={{top: '-2.5rem'}}>
             {array.map((_, idx) => (
               <div key={idx} className="w-full flex justify-center" style={{minWidth: '16px'}}>
@@ -380,18 +374,18 @@ const startBinarySearch = async () => {
               </div>
             ))}
           </div>
-          {/* Bars */}
+         
           {array.map((value, index) => {
             const isActive = activeIndices.includes(index);
             const isSorted = sortedIndices.includes(index);
             const [left, right] = side.length ? side : [0, array.length - 1];
             const isOutOfRange = index < left || index > right;
             const isMid = midIndex === index;
-            // Default bar color is blue
+        
             let barColor = 'bg-blue-500';
             if (isSorted || (isfound && midIndex === index)) barColor = 'bg-green-500';
             else if (isMid) barColor = 'bg-yellow-400';
-            // Only show grey for out-of-range during search, not after
+          
             else if (isOutOfRange && isSorting) barColor = 'bg-gray-400';
 
             return (
@@ -415,7 +409,6 @@ const startBinarySearch = async () => {
           })}
         </div>
 
-        {/* Legend & Step Indicator */}
         <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-6 w-full">
           <div className="flex items-center mb-2 sm:mb-0">
             <div className="w-4 h-4 bg-blue-500 mr-1 sm:mr-2 rounded-sm border-2 border-blue-700"></div>
@@ -439,7 +432,7 @@ const startBinarySearch = async () => {
             </div>
           )}
         </div>
-        {/* Step Explanation */}
+     
         {stepExplanation && (
           <div className="mt-2 text-center text-sm sm:text-base font-semibold text-gray-800 bg-yellow-50 rounded p-2 border border-yellow-200 shadow">
             {stepExplanation}

@@ -27,8 +27,8 @@ className="p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
 
 {/* Mobile Menu - Dropdown */}
 {expanded && (
-<div className="lg:hidden bg-white shadow-lg w-screen fixed top-15 rounded-b-2xl left-0 z-40 border-t">
-<ul className="px-4 py-2">
+<div className="lg:hidden bg-white shadow-lg w-screen fixed top-14 rounded-b-2xl left-0 z-40 border-t">
+<ul className="px-4 py-1">
 {children}
 </ul>
 </div>
@@ -38,7 +38,7 @@ className="p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
 <div className="hidden ">
 <aside className={`w-64  fixed left-0 top-0`}>
    <nav className=" flex flex-col bg-white border-r shadow-sm">
-<div className="p-4 pb-2 flex justify-between items-center">
+<div className="p-2pb-2 flex justify-between items-center">
 <button onClick={() => setexpanded(!expanded)}
 className="p-1.5 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-900">
   {expanded? <ChevronFirst/> : <ChevronLast/>}

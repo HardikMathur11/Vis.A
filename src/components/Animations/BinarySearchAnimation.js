@@ -299,7 +299,7 @@ const startBinarySearch = async () => {
               isSorting && !isPaused ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'
             } text-white`}
           >
-            Start binary Search
+            Start Binary Search
           </button>
           {isSorting && (
             <button

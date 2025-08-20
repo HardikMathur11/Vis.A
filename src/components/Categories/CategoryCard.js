@@ -3,7 +3,7 @@ import graphCategory from "./GraphCategory";
 import Card from "../Card"; 
 import Navbar from "../Navbar";
 import Sidebar , {SidebarItem} from "../Sidebar";
-import { Home as Homeicon, Flag } from "lucide-react"
+import { Home as Homeicon, Flag, ChartNoAxesColumnIncreasing as Charts, Bot } from "lucide-react";
 import { useState } from "react";
 
 export default function CategoryCard() {
@@ -44,9 +44,9 @@ export default function CategoryCard() {
                          
                             <Sidebar>
                                      <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />
-                                     <SidebarItem icon={<Flag size={20} />} text="Algorithms" link="/Category"  />
-                                     <SidebarItem icon={<Flag size={20} />} text="Chatbot" link="/Chatbot" />
-                                     <SidebarItem icon={<Flag size={20} />} text="About" link="/About" />
+                                     <SidebarItem icon={<Charts size={20} />} text="Algorithms" link="/Category"  />
+                                     <SidebarItem icon={<Bot size={20} />} text="Chatbot" link="/Chatbot" />
+                                     <SidebarItem icon={<Flag size={20} />} text="About" link="#footer" />
                                    </Sidebar>
                             </div>
 
@@ -61,7 +61,7 @@ export default function CategoryCard() {
             <input
               type="text"
               placeholder="Search algorithms..."
-              className="w-full p-4 pl-6 pr-12 text-lg border-2  mt-30 lg:mt-8 border-gray-200 rounded-2xl shadow-sm 
+              className="w-full p-4 pl-6 pr-12 text-lg border-2  mt-20 lg:mt-8 border-gray-200 rounded-2xl shadow-sm 
                          bg-white/80 backdrop-blur-sm transition-all duration-300 ease-in-out
                          focus:border-blue-400 focus:ring-4 focus:ring-blue-100 focus:outline-none
                          hover:shadow-md group-hover:shadow-lg"

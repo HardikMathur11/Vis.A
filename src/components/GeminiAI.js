@@ -61,7 +61,7 @@ export default function Chatbot() {
   return (
     <div className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 ">
      
-      <div className="lg:hidden w-full relative px-4 pt-2 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
+      <div className="lg:hidden w-full relative px-4 pt-1 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
         <Sidebar>
           <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/" />
           <SidebarItem icon={<Charts size={20} />} text="Algorithms" link="/Category" />

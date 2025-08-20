@@ -13,7 +13,7 @@ return (
 <>
 {/* Mobile Header - Full width navbar */}
 
-<div className="lg:hidden  mb-2  bg-white shadow-md p-4 h-12 flex justify-between items-center w-screen fixed left-0 z-50 rounded-b-lg">
+<div className="lg:hidden  mb-2  bg-white shadow-md p-4 h-12 flex justify-between items-center w-screen fixed left-0 z-50 rounded-b-sm">
  <div className="block w-full">
   <h2 className="text-2xl font-bold">
     Vis.<span className="text-blue-400">A</span>
@@ -27,7 +27,7 @@ className="p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
 
 {/* Mobile Menu - Dropdown */}
 {expanded && (
-<div className="lg:hidden bg-white shadow-lg w-screen fixed top-14 rounded-b-2xl left-0 z-40 border-t">
+<div className="lg:hidden bg-white shadow-lg w-screen fixed top-12.5 rounded-b-2xl left-0 z-40 border-t">
 <ul className="px-4 py-1">
 {children}
 </ul>

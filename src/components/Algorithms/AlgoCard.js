@@ -31,7 +31,7 @@ const AlgorithmPage = () => {
   return (
      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
      
-             <div className=" lg:hidden   w-full relative mt-2 ">
+             <div className=" lg:hidden   w-full relative mt-1">
                                 
                                         <Sidebar>
                                                  <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />

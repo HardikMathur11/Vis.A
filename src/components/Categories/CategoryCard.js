@@ -40,7 +40,7 @@ export default function CategoryCard() {
        
               
                          
-                                  <div className=" lg:hidden   w-full relative">
+                                  <div className=" lg:hidden  mt-1 w-full relative">
                          
                             <Sidebar>
                                      <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />

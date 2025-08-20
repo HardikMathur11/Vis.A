@@ -263,7 +263,7 @@ export default function Home() {
       {/* Mobile Layout - Show Sidebar */}
       <div className=" lg:hidden relative   overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
         {/* Mobile Sidebar */}
-        <div className="mt-2">
+        <div className="mt-1">
         <Sidebar>
           <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />
           <SidebarItem icon={<Charts size={20} />} text="Algorithms" link="/Category"  />

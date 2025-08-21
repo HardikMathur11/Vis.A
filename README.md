@@ -38,3 +38,26 @@ git clone https://github.com/your-username/Vis.A.git
 cd Vis.A
 npm install
 npm run dev
+```
+---
+
+## Usage
+
+-Open the app in browser
+-Select an algorithm (e.g. Bubble Sort, Quick Sort, etc.)
+-Watch the visualization in action 🎥
+-Use Gemini AI integration to get step-by-step explanations
+
+---
+
+##🤝 Contributing
+
+-Contributions are welcome!
+-Fork the repo
+-Create a new branch
+-Submit a pull request 
+
+---
+
+##📜 License
+-This project is licensed under the MIT License.

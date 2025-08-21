@@ -50,7 +50,7 @@ npm run dev
 
 ---
 
-##🤝 Contributing
+## 🤝 Contributing
 
 -Contributions are welcome!
 -Fork the repo
@@ -59,5 +59,5 @@ npm run dev
 
 ---
 
-##📜 License
+## 📜 License
 -This project is licensed under the MIT License.

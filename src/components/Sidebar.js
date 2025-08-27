@@ -11,9 +11,9 @@ const { expanded, setexpanded } = useContext(SidebarContext);
 console.log(expanded)
 return (
 <>
-{/* Mobile Header - Full width navbar */}
 
-<div className="lg:hidden  mb-2  bg-white shadow-md p-4 h-12 flex justify-between items-center w-screen fixed left-0 z-50 rounded-b-sm">
+
+<div className="lg:hidden  mb-2 bg-gradient-to-r from-white/95  to-white/95 border border-white/50 shadow-md p-4 h-12 flex justify-between items-center w-screen fixed left-0 z-50 rounded-b-sm">
  <div className="block w-full">
   <h2 className="text-2xl font-bold">
     Vis.<span className="text-blue-400">A</span>
@@ -27,7 +27,7 @@ className="p-2 rounded-lg bg-gray-50 cursor-pointer hover:bg-gray-100">
 
 {/* Mobile Menu - Dropdown */}
 {expanded && (
-<div className="lg:hidden bg-white shadow-lg w-screen fixed top-12.5 rounded-b-2xl left-0 z-40 border-t">
+<div className="lg:hidden bg-gradient-to-r from-white/95  to-white/95 border border-white/20 shadow-md w-screen fixed top-12 rounded-b-2xl left-0 z-40 border-t">
 <ul className="px-4 py-1">
 {children}
 </ul>
@@ -77,14 +77,26 @@ export function SidebarItem({icon , text , link ,  alert})
        
        const isactive = location.pathname === link;
 
+       {link.startsWith("#") ? (
+  <a href={link} className="sidebar-item">{icon} {text}</a>
+) : (
+  <Link to={link} className="sidebar-item">{icon} {text}</Link>
+)}
 
-    function handleclick()
-{
-            navigate(link);
-            setexpanded(false);
 
-        
-}
+  function handleclick() {
+    if (link.startsWith("#")) {
+      // normal anchor scroll ke liye
+      const element = document.querySelector(link);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // react-router navigation ke liye
+      navigate(link);
+      setexpanded(false);
+    }
+  }
     return(
         <li className={`relative flex items-center py-3 px-4 my-1 font-medium rounded-md cursor-pointer transition-colors group ${isactive ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800 " : "hover:bg-indigo-50 text-gray-600"} `}>
             {icon}

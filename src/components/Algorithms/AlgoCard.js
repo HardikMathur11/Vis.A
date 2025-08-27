@@ -3,8 +3,10 @@ import { useParams } from "react-router";
 import algorithmData from "./Algorithm";
 import BubbleSortAnimation from "../Animations/BubbleSortAnimations";
 import SelectionSortAnimation from "../Animations/SelectionSortAnimation";
+import InsertionSortAnimation from "../Animations/InsertionSortAnimation"
 import LinearSearchAnimation from "../Animations/LinearSearchAnimation";
 import BinarySearchAnimation from "../Animations/BinarySearchAnimation"
+
 import { Key } from "lucide-react";
 import  Sidebar, {SidebarItem } from "../Sidebar";
 import Navbar from "../Navbar";
@@ -16,7 +18,8 @@ const animationComponents = {
   BubbleSortAnimation: <BubbleSortAnimation />,
   SelectionSortAnimation: <SelectionSortAnimation />,
   LinearSearchAnimation: <LinearSearchAnimation />,
-  BinarySearchAnimation:<BinarySearchAnimation/>
+  BinarySearchAnimation:<BinarySearchAnimation/>,
+  InsertionSortAnimation : <InsertionSortAnimation/>
   
 //   BinarySearchAnimation: <BinarySearchAnimation />,
 };
@@ -31,13 +34,13 @@ const AlgorithmPage = () => {
   return (
      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
      
-             <div className=" lg:hidden   w-full relative mt-1">
+             <div className=" lg:hidden   w-full relative ">
                                 
                                         <Sidebar>
                                                  <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />
                                                  <SidebarItem icon={<Charts size={20} />} text="Algorithms" link="/Category"  />
                                                  <SidebarItem icon={<Bot size={20} />} text="Chatbot" link="/Chatbot" />
-                                                 <SidebarItem icon={<Flag size={20} />} text="About" link="/About" />
+                                                 <SidebarItem icon={<Flag size={20} />} text="About" link="#footer" />
                                                </Sidebar>
                                         </div>
                           

@@ -1,25 +1,23 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-const LinearSearchVisualizer = () => {
-  
+const InsertionSortVisualizer = () => {
+ 
   const [array, setArray] = useState([]);
   const [isSorting, setIsSorting] = useState(false);
-  const [speed, setSpeed] = useState(2);
+  const [speed, setSpeed] = useState(2); 
   const [activeIndices, setActiveIndices] = useState([]);
   const [sortedIndices, setSortedIndices] = useState([]);
   const [currentStep, setCurrentStep] = useState('Ready to sort');
   const [isPaused, setIsPaused] = useState(false);
-  const [elementInput, setElementInput] = useState("");
+  const [elementInput, setElementInput] = useState(""); 
   const pauseRef = useRef(false);
+  const [active , setactive] = useState(null);
   const sortingActiveRef = useRef(false);
-  const [target , settarget] = useState("");
-  const [isfound , setisfound] = useState(false);
-  const [isnotfound , setisnotfound] = useState(false);
 
  
   const generateArray = useCallback((size = 20) => {
-
-  if (elementInput.length>0 &&elementInput.trim() !== "" ) {
+ 
+    if (elementInput.length>0 &&elementInput.trim() !== "" ) {
       
         const newArray = elementInput.split(',')
           .map(num => parseInt(num.trim(), 10))
@@ -41,11 +39,12 @@ const LinearSearchVisualizer = () => {
          setCurrentStep("Error parsing custom array:Please enter valid Input");
         return ;
       }
-  }
-   
+    
+    }
+    
     const newArray = [];
     for (let i = 0; i < size; i++) {
-      newArray.push(Math.floor(Math.random() * 20 % size) + 1);
+      newArray.push(Math.floor(Math.random() * 20) + 1);
     }
     setArray(newArray);
     setSortedIndices([]);
@@ -53,17 +52,15 @@ const LinearSearchVisualizer = () => {
     setCurrentStep('Random array generated');
     pauseRef.current = false;
     setIsPaused(false);
-    setisfound(false);
-    setisnotfound(false);
     sortingActiveRef.current = false;
   }, [elementInput]);
 
-  
+
   useEffect(() => {
     generateArray();
   }, [generateArray]);
 
-  
+
   const delay = useCallback(async (ms) => {
     return new Promise((resolve) => {
       const checkPause = () => {
@@ -72,70 +69,65 @@ const LinearSearchVisualizer = () => {
         } else if (sortingActiveRef.current) {
           setTimeout(resolve, ms); 
         } else {
-          resolve(); 
+          resolve();
         }
       };
       checkPause();
     });
   }, []);
 
- 
-  const startLinearSearch = async () => {
-    if (isSorting) return;
+  const startInsertionSort = async () => {
+  if (isSorting) return;
 
-    if(!target) {
-      setCurrentStep("Please enter the target");
-      return ;
-    }
-    
-    setIsSorting(true);
-    sortingActiveRef.current = true;
-    pauseRef.current = false;
-    setIsPaused(false);
-     setSortedIndices([]);
-    setActiveIndices([]);
-    setisnotfound(false);
-    setisfound(false);
-    let arr = [...array];
-   
+  setIsSorting(true);
+  sortingActiveRef.current = true;
+  pauseRef.current = false;
+  setIsPaused(false);
 
-    setCurrentStep('Starting Linear Search...');
-    // setSortedIndices([]);
-    // setActiveIndices([]);
-   
+  let arr = [...array];
 
-    for (let i = 0; i < arr.length; i++) {
-        
-        if(!sortingActiveRef.current) break;
-    if (arr[i] == target) {
-        setActiveIndices([i]);
-        setIsSorting(true)
-        setisfound(true);
-        setCurrentStep(`Found target ${target} at index ${i}`);
-        await delay(1000 / speed);
-         setActiveIndices([]);
-        setSortedIndices([i]);
-        sortingActiveRef.current = false;
-        setIsSorting(false);
-        return i;
-    };
+  for (let i = 1; i < arr.length; i++) {
+    let key = arr[i];
+    let j = i - 1;
 
     setActiveIndices([i]);
-    setCurrentStep(`Comparing ${arr[i]} with ${target}`);
+    setCurrentStep(`Key element: ${key}`);
     await delay(1000 / speed);
-    if (!sortingActiveRef.current) break;
 
+    // shift elements
+    while (j >= 0 && arr[j] > key) {
+      if (!sortingActiveRef.current) return; // stop immediately
+
+      setCurrentStep(`Comparing ${arr[j]} > ${key}, shifting ${arr[j]}`);
+      arr[j + 1] = arr[j];
+      setArray([...arr]);
+
+      setActiveIndices([j, j + 1]);
+      await delay(1000 / speed);
+
+      j--;
+    }
+
+    arr[j + 1] = key;
+    setArray([...arr]);
+
+    // Sorted upto i
+    setSortedIndices(prev => [...prev, i]);
+    setActiveIndices([]);
+    setCurrentStep(`Inserted ${key} at position ${j + 1}`);
+    await delay(1000 / speed);
+
+    if (!sortingActiveRef.current) return; // in case stopped
   }
-  if(sortingActiveRef.current){
-    setisnotfound(true);
-  setCurrentStep(`Target ${target} not found in the array`);
-  setActiveIndices([]);
-    setSortedIndices([]);
-    sortingActiveRef.current = false;
-    setIsSorting(false);
-    setIsPaused(false);
-  }
-  else{
+
+
+  if (sortingActiveRef.current) {
+     setSortedIndices([...Array(arr.length).keys()]);
+  setCurrentStep("Sorting complete");
+  setIsSorting(false);
+  sortingActiveRef.current = false;
+    }
+    else{
     setActiveIndices([]);
     setSortedIndices([]);
     
@@ -148,8 +140,54 @@ const LinearSearchVisualizer = () => {
      sortingActiveRef.current = false;
     setCurrentStep("");
   }
-   
-}
+    setIsSorting(false);
+    sortingActiveRef.current = false;
+  };
+  // Sorting complete
+  
+
+
+
+//       if (!sortingActiveRef.current) break;
+
+//       // Visualize the swap
+//       if (minIdx !== i) {
+//         setCurrentStep(`Swapping ${arr[i]} and ${arr[minIdx]}`);
+//         setActiveIndices([i, minIdx]);
+//         await delay(1000 / speed);
+//         if (!sortingActiveRef.current) break;
+        
+//         [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]];
+//         setArray([...arr]);
+//         await delay(1000 / speed);
+//         if (!sortingActiveRef.current) break;
+//       }
+
+//       setSortedIndices(prev => [...prev, i]);
+//       setActiveIndices([]);
+//     }
+
+//     if (sortingActiveRef.current) {
+//       setSortedIndices(prev => [...prev, arr.length - 1]);
+//        setIsSorting(false);
+//     sortingActiveRef.current = false;
+//       setCurrentStep('Sorting complete');
+//     }
+//     else{
+//     setActiveIndices([]);
+//     setSortedIndices([]);
+    
+//     sortingActiveRef.current = true;
+//     setIsSorting(false);
+//     setIsPaused(false);
+
+//      setCurrentStep('Sorting stopped');
+//    await delay(1000 / speed);
+//      sortingActiveRef.current = false;
+//     setCurrentStep("");
+//   }
+//     setIsSorting(false);
+//     sortingActiveRef.current = false;
   
 
   const togglePause = () => {
@@ -167,16 +205,16 @@ const LinearSearchVisualizer = () => {
     generateArray();
   }
 
-  const stopSorting = () => {
+   const stopSorting = () => {
   sortingActiveRef.current = false; // Stops immediately
 };
-
 
   return (
   <div className="min-h-full bg-gray-100 p-1 sm:p-16 md:p-8">
       <div className="max-w-6xl mx-auto w-full p-4">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8">Linear Search Visualizer</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-4 sm:mb-8">Insertion Sort Visualizer</h1>
 
+     
         <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mb-4 w-full">
           <div className="flex flex-col w-full sm:w-64">
             <label className="mb-1 text-xs sm:text-sm font-semibold text-gray-700">Custom Array</label>
@@ -189,20 +227,10 @@ const LinearSearchVisualizer = () => {
               disabled={isSorting && !isPaused}
             />
           </div>
-          <div className="flex flex-col w-full sm:w-64">
-            <label className="mb-1 text-xs sm:text-sm font-semibold text-gray-700">Target Value</label>
-            <input
-              type="number"
-              value={target}
-              onChange={(e) => settarget(e.target.value)}
-              placeholder="Enter target value"
-              className="px-2 py-2 border rounded-md w-full text-xs sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
-              disabled={isSorting && !isPaused}
-            />
-          </div>
+        
         </div>
 
-     
+   
         <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-4 sm:mb-8 w-full">
           <button
             onClick={() => handlearray()}
@@ -214,13 +242,13 @@ const LinearSearchVisualizer = () => {
             Generate Random Array
           </button>
           <button
-            onClick={startLinearSearch}
-            disabled={isSorting && !isPaused }
+            onClick={startInsertionSort}
+            disabled={isSorting && !isPaused}
             className={`px-2 py-2 sm:px-4 sm:py-2 rounded-md w-full sm:w-auto text-xs sm:text-base ${
               isSorting && !isPaused ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'
             } text-white`}
           >
-            Start Linear Search
+            Start Insertion Sort
           </button>
           {isSorting && (
             <button
@@ -260,9 +288,7 @@ const LinearSearchVisualizer = () => {
               />
                <span className="ml-2 text-xs sm:text-base font-semibold text-gray-700">{speed}</span>
             </div>
-         
           </div>
-
           <div className='flex flex-col w-full sm:w-auto'>
             <label className="mb-1 text-xs sm:text-sm font-semibold text-gray-700">Array Size:</label>
             <div className='"flex items-center gap-1 sm:gap-2"'>
@@ -277,24 +303,24 @@ const LinearSearchVisualizer = () => {
             />
             <span className="ml-2 text-xs sm:text-base font-semibold text-gray-700">{array.length}</span>
           </div>
-        </div>
-         </div>
-
-     
-        <div className="text-center mb-2 sm:mb-4 min-h-8">
-          <p className={`text-xs sm:text-lg font-semibold ${isfound ? 'text-green-400 sm:text-2xl' : 'text-xs sm:text-lg'}  ${isnotfound ? 'text-red-400 sm:text-2xl' : 'text-xs sm:text-lg'}`}>{currentStep}</p>
+          </div>
         </div>
 
    
+        <div className="text-center mb-2 sm:mb-4 min-h-8">
+          <p className={`text-xs sm:text-lg font-semibold ${activeIndices?  ` text-xs sm:text-lg`:'text-green-400 sm:text-2xl' }  `}>{currentStep}</p>
+        </div>
+
         <div className="flex items-end h-[50vh] sm:h-[75vh] bg-white p-1 sm:p-4 rounded-lg shadow-md border border-gray-200 w-full overflow-x-auto sm:overflow-x-hidden scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
           {array.map((value, index) => {
             const isActive = activeIndices.includes(index);
             const isSorted = sortedIndices.includes(index);
+            const isact = active !== null && active === index;
             return (
               <div
                 key={index}
                 className={`rounded-t-md transition-all duration-300 ease-in-out flex flex-col justify-center
-                  ${isActive ? 'bg-red-500' : isSorted ? 'bg-green-500' : 'bg-blue-500'}
+                  ${ isact   ? 'bg-amber-500' :   isActive ? 'bg-red-500' : isSorted ? 'bg-green-500'  : 'bg-blue-500'}
                   mx-[1.5px] sm:mx-1
                 `}
                 style={{
@@ -312,7 +338,7 @@ const LinearSearchVisualizer = () => {
           })}
         </div>
 
-        
+      
         <div className="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-6 w-full">
           <div className="flex items-center mb-2 sm:mb-0">
             <div className="w-4 h-4 bg-blue-500 mr-1 sm:mr-2 rounded-sm"></div>
@@ -332,11 +358,4 @@ const LinearSearchVisualizer = () => {
   );
 };
 
-
-
-
-
-
-
-
-export default LinearSearchVisualizer;
+export default InsertionSortVisualizer;

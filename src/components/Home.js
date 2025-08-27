@@ -4,52 +4,94 @@ import Sidebar, { SidebarItem } from "./Sidebar";
 import { Home as Homeicon, Flag , ChartNoAxesColumnIncreasing as Charts , Bot} from "lucide-react"
 import { SidebarContext } from "./SidebarContext";
 import {Link} from 'react-router';
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { BiSolidData} from "react-icons/bi";
 
+
+import { Github, Linkedin, Instagram, Mail, Database } from "lucide-react";
 
 function Footer() {
   return (
-  
-    <footer
-      id="footer" 
-      className="w-full bg-gray-900 text-gray-300 pt-8 py-8 shadow-inner h-full "
-    >
-      <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-        <div className="mb-4 md:mb-0 text-center md:text-left">
-          <h2 className="text-xl font-bold tracking-wide text-white">VIS.A</h2>
-          <p className="text-sm text-gray-400 mt-2">
+    <footer  id="footer" className="w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-gray-300 pt-10 pb-6 shadow-inner border-t border-gray-700">
+      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        
+        <div>
+          <h2 className="text-2xl font-bold tracking-wide text-white">Vis.A</h2>
+          <p className="text-sm text-gray-400 mt-3 leading-relaxed">
             Transform abstract algorithms into stunning visual experiences.
           </p>
         </div>
-        <div className="flex space-x-6">
-          <a
-            href="https://github.com/"
-            target="_blank"
+
+      
+        <div className="text-center md:text-left">
+          <h3 className="text-lg font-semibold text-white mb-3">Quick Links</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a className="hover:text-blue-400 transition">Home</a>
+            </li>
+            <li>
+              <a  className="hover:text-blue-400 transition">About</a>
+            </li>
+            <li>
+              <a  className="hover:text-blue-400 transition">Visualisations</a>
+            </li>
+            <li>
+              <a  className="hover:text-blue-400 transition">Contact</a>
+            </li>
+          </ul>
+        </div>
+
+        <div className="flex flex-col items-center md:items-end">
+          <h3 className="text-lg font-semibold text-white mb-3">Connect with us</h3>
+          <div className="flex space-x-5">
+            <a
+              href="https://github.com/HardikMathur11/Vis.A"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <FaGithub></FaGithub>
+            </a>
+            <a
+             href="https://www.linkedin.com/in/hardik-mathur-5a80a82ba?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <FaLinkedin size={22} />
+            </a>
+            <a
+              
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+             <FaInstagram size={22} />
+            </a>
+            <a
+              href="mailto:hardikmathur11@gmail.com"
+              className="hover:text-white transition"
+            >
+             <MdEmail size={22} />
+            </a>
            
-            className="hover:text-white transition"
-          >
-            GitHub
-          </a>
-          <a
-            href="mailto:contact@dsavisualiser.com"
-            className="hover:text-white transition"
-          >
-            Contact
-          </a>
-          <a
-            href="#footer"
-            className="hover:text-white transition"
-          >
-            About
-          </a>
+          </div>
         </div>
       </div>
-      <div className="mt-6 text-center text-xs text-gray-500">
-        &copy; {new Date().getFullYear()} DSA Visualiser. All rights reserved.
+
+      {/* Bottom */}
+      <div className="mt-8  text-center text-xs text-gray-500 border-t border-gray-700 pt-4 ">
+        
+        <div className="m-2"><h4>Made By Hardik Mathur</h4></div>
+        &copy; {new Date().getFullYear()} <span className="font-semibold text-white mt-4 ">DSA Visualiser</span>. All rights reserved.
       </div>
     </footer>
-
   );
 }
+
+
 
 
 
@@ -263,7 +305,7 @@ export default function Home() {
       {/* Mobile Layout - Show Sidebar */}
       <div className=" lg:hidden relative   overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900">
         {/* Mobile Sidebar */}
-        <div className="mt-1">
+        <div className="">
         <Sidebar>
           <SidebarItem icon={<Homeicon size={20} />} text="Home" link="/"  />
           <SidebarItem icon={<Charts size={20} />} text="Algorithms" link="/Category"  />
